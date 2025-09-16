@@ -1,7 +1,14 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { MessageCircle, Users, Brain, Heart, Plus, Bell, User, Home, ArrowRight, Play, Clock, Star, Bot, Sparkles, Zap, Moon, Sun, Cloud } from 'lucide-react';
+
+
+const Homepage = () => {
+  return (
+    <div>
+      <h1>Welcome to Mental Health App</h1>
+    </div>
+  )
+}
 
 
 
@@ -359,6 +366,5 @@ const MentalHealthHomeScreen = () => {
   );
 };
 
-export default MentalHealthHomeScreen;
-
- 
+// export default MentalHealthHomeScreen;
+export default Homepage;
