@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
+// import Homepage from './pages/homepage';
 
 const sampleVideos = [
   {
