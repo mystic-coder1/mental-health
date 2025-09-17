@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
+import { MessageCircle, Users, Brain, Heart, Plus, Bell } from 'lucide-react';
+// import { Brain } from 'lucide-react';
+
+// import Homepage from './pages/homepage';
 
 const sampleVideos = [
   {
