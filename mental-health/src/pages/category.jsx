@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import WelcomeScreen from './WelcomeScreen';
-import CategorySelection from './CategorySelection';
-import QuestionScreen from './QuestionScreen';
-import ResultsScreen from './ResultsScreen';
-import { Brain, Heart, Moon, Flame, Cloud, BookOpen } from 'heroicons-react';
+// import WelcomeScreen from './WelcomeScreen';
+// import CategorySelection from './CategorySelection';
+// import QuestionScreen from './QuestionScreen';
+// import ResultsScreen from './ResultsScreen';
+// import { Brain, Heart, Moon, Flame, Cloud, BookOpen } from 'heroicons-react';
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState('welcome');

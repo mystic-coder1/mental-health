@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+// export default function LoginDoc() {
+//   return <div>Login Doctor Page</div>;
+// }
 const DoctorLoginPage = () => {
   const [formData, setFormData] = useState({
     fullName: '',
