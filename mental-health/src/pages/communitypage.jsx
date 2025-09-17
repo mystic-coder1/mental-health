@@ -1,524 +1,505 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  MessageCircle, 
-  Users, 
-  UserCheck, 
-  Heart, 
-  Send, 
-  Search, 
-  Filter,
-  AlertTriangle,
-  CloudRain,
-  Flame,
-  Moon,
-  GraduationCap,
-  UserX,
-  Bell,
-  Settings,
-  Lock,
-  Globe,
-  Plus,
-  Star,
-  ThumbsUp,
-  Eye,
-  Clock,
-  Shield,
-  Video,
-  Phone
-} from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { MessageCircle, Users, Send, Search, Filter, Heart, MessageSquare, Star, User, Settings, Bell, Plus, Phone, Video, MoreHorizontal, Smile, Paperclip, ArrowLeft, UserCheck, Shield, Coffee, Lightbulb, BookOpen, TrendingUp } from 'lucide-react';
 
-const CommunityPage = () => {
-  const [activeTab, setActiveTab] = useState('community');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [showPrivateChat, setShowPrivateChat] = useState(false);
-  const [selectedChatUser, setSelectedChatUser] = useState(null);
+const CommunityPlatform = () => {
+  const [currentPage, setCurrentPage] = useState('community');
+  const [selectedChat, setSelectedChat] = useState(null);
   const [newMessage, setNewMessage] = useState('');
-  const [showCreatePost, setShowCreatePost] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
+  const messagesEndRef = useRef(null);
 
+  // Sample data
   const categories = [
-    { id: 'all', name: 'All Topics', icon: Globe, color: 'from-purple-500 to-pink-500' },
-    { id: 'anxiety', name: 'Anxiety', icon: AlertTriangle, color: 'from-orange-500 to-red-500' },
-    { id: 'depression', name: 'Depression', icon: CloudRain, color: 'from-gray-600 to-blue-600' },
-    { id: 'burnout', name: 'Burnout', icon: Flame, color: 'from-red-600 to-orange-600' },
-    { id: 'sleep', name: 'Sleep Issues', icon: Moon, color: 'from-indigo-600 to-purple-600' },
-    { id: 'academic', name: 'Academic Stress', icon: GraduationCap, color: 'from-green-600 to-teal-600' },
-    { id: 'social', name: 'Social Issues', icon: UserX, color: 'from-purple-600 to-pink-600' }
+    { id: 'all', name: 'All', icon: Users, color: '#585182' },
+    { id: 'general', name: 'General Discussion', icon: MessageCircle, color: '#4a90e2' },
+    { id: 'advice', name: 'Ask Advisors', icon: Lightbulb, color: '#f5a623' },
+    { id: 'resources', name: 'Resources', icon: BookOpen, color: '#50c878' },
+    { id: 'success', name: 'Success Stories', icon: TrendingUp, color: '#ff6b6b' },
+    { id: 'coffee', name: 'Coffee Chat', icon: Coffee, color: '#8b4513' }
   ];
 
-  const communityPosts = [
+  const posts = [
     {
       id: 1,
-      user: { name: 'Sarah M.', isAdvisor: false, avatar: '👩‍💼' },
-      category: 'anxiety',
-      title: 'Dealing with exam anxiety - tips that worked for me',
-      content: 'I wanted to share some techniques that really helped me manage my exam anxiety. Deep breathing exercises before each exam and creating a study schedule really made a difference...',
-      timestamp: '2 hours ago',
-      likes: 24,
-      replies: 12,
+      author: 'Sarah Johnson',
+      role: 'Community Member',
+      avatar: '👩‍💼',
+      time: '2 hours ago',
+      category: 'advice',
+      title: 'How to balance work and personal growth?',
+      content: 'I\'ve been struggling to find the right balance between my demanding job and pursuing personal development. Any advice from those who\'ve been there?',
+      likes: 23,
+      comments: 8,
       isLiked: false
     },
     {
       id: 2,
-      user: { name: 'Dr. Emily Johnson', isAdvisor: true, avatar: '👩‍⚕️' },
-      category: 'depression',
-      title: 'Understanding seasonal depression patterns',
-      content: 'As we approach winter, many people experience changes in mood. Here are some evidence-based strategies to help manage seasonal depression symptoms...',
-      timestamp: '4 hours ago',
+      author: 'Dr. Michael Chen',
+      role: 'Advisor',
+      avatar: '👨‍⚕️',
+      time: '4 hours ago',
+      category: 'general',
+      title: 'Weekly Check-in: How is everyone doing?',
+      content: 'Hope everyone is having a great week! Remember, small progress is still progress. What\'s one thing you accomplished this week that you\'re proud of?',
       likes: 45,
-      replies: 18,
-      isLiked: true
+      comments: 19,
+      isLiked: true,
+      isAdvisor: true
     },
     {
       id: 3,
-      user: { name: 'Mike R.', isAdvisor: false, avatar: '👨‍💻' },
-      category: 'burnout',
-      title: 'Work-life balance as a student',
-      content: 'Struggling to find balance between work, studies, and personal life. Would love to hear how others manage this...',
-      timestamp: '6 hours ago',
-      likes: 15,
-      replies: 8,
+      author: 'Emma Rodriguez',
+      role: 'Community Member',
+      avatar: '👩‍🎨',
+      time: '6 hours ago',
+      category: 'success',
+      title: 'Finally launched my side project! 🎉',
+      content: 'After months of planning and development, I finally launched my freelance design platform. Thank you to everyone in this community for the encouragement!',
+      likes: 67,
+      comments: 24,
       isLiked: false
     }
   ];
 
-  const advisors = [
-    { 
-      id: 1, 
-      name: 'Dr. Emily Johnson', 
-      speciality: 'Anxiety & Depression', 
-      avatar: '👩‍⚕️',
-      rating: 4.9,
-      status: 'online',
-      experience: '8 years'
-    },
-    { 
-      id: 2, 
-      name: 'Dr. Michael Chen', 
-      speciality: 'Academic Stress', 
+  const chats = [
+    {
+      id: 1,
+      name: 'Dr. Michael Chen',
+      role: 'Advisor',
       avatar: '👨‍⚕️',
-      rating: 4.8,
-      status: 'away',
-      experience: '6 years'
+      lastMessage: 'I think we should schedule a follow-up session next week.',
+      time: '10:30 AM',
+      unread: 2,
+      isOnline: true,
+      type: 'private'
     },
-    { 
-      id: 3, 
-      name: 'Dr. Lisa Williams', 
-      speciality: 'Sleep & Wellness', 
-      avatar: '👩‍⚕️',
-      rating: 4.9,
-      status: 'online',
-      experience: '10 years'
+    {
+      id: 2,
+      name: 'Design Enthusiasts',
+      role: 'Group Chat',
+      avatar: '🎨',
+      lastMessage: 'Sarah: The new Adobe update is amazing!',
+      time: '9:45 AM',
+      unread: 0,
+      isOnline: false,
+      type: 'group'
+    },
+    {
+      id: 3,
+      name: 'Anna Wilson',
+      role: 'Community Member',
+      avatar: '👩‍💻',
+      lastMessage: 'Thanks for the advice on the project!',
+      time: 'Yesterday',
+      unread: 1,
+      isOnline: false,
+      type: 'private'
     }
   ];
 
-  const recentChats = [
-    { id: 1, name: 'Sarah M.', lastMessage: 'Thanks for the advice!', time: '2 min', unread: 1, avatar: '👩‍💼' },
-    { id: 2, name: 'Dr. Emily Johnson', lastMessage: 'Let\'s schedule a follow-up', time: '1 hour', unread: 0, avatar: '👩‍⚕️' },
-    { id: 3, name: 'Support Group - Anxiety', lastMessage: 'New member joined', time: '3 hours', unread: 3, avatar: '👥' }
+  const messages = [
+    {
+      id: 1,
+      sender: 'Dr. Michael Chen',
+      content: 'Hi! I saw your post about work-life balance. I think we could explore some strategies that might help.',
+      time: '10:15 AM',
+      isSelf: false,
+      avatar: '👨‍⚕️'
+    },
+    {
+      id: 2,
+      sender: 'You',
+      content: 'That would be really helpful! I feel like I\'m always behind on something.',
+      time: '10:18 AM',
+      isSelf: true,
+      avatar: '👤'
+    },
+    {
+      id: 3,
+      sender: 'Dr. Michael Chen',
+      content: 'That\'s completely normal. Let\'s start with time-blocking techniques. Have you tried setting specific hours for different activities?',
+      time: '10:20 AM',
+      isSelf: false,
+      avatar: '👨‍⚕️'
+    },
+    {
+      id: 4,
+      sender: 'You',
+      content: 'I\'ve heard about it but never really implemented it properly.',
+      time: '10:25 AM',
+      isSelf: true,
+      avatar: '👤'
+    },
+    {
+      id: 5,
+      sender: 'Dr. Michael Chen',
+      content: 'I think we should schedule a follow-up session next week.',
+      time: '10:30 AM',
+      isSelf: false,
+      avatar: '👨‍⚕️'
+    }
   ];
 
-  const Header = () => (
-    <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-t-xl">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-white text-xl md:text-2xl font-bold flex items-center">
-            <Users className="w-6 h-6 mr-2" />
-            Community Hub
-          </h1>
-          <p className="text-purple-100 text-sm">Connect, Share, and Grow Together</p>
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
+  const filteredPosts = posts.filter(post => {
+    const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory.toLowerCase();
+    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                         post.content.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const handleSendMessage = () => {
+    if (newMessage.trim()) {
+      setNewMessage('');
+    }
+  };
+
+  const CommunityPage = () => (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-2xl" style={{backgroundColor: '#585182'}}>
+                  🌟
+                </div>
+                <h1 className="text-2xl font-bold" style={{color: '#585182'}}>Community Hub</h1>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <button 
+                onClick={() => setCurrentPage('chat')}
+                className="flex items-center space-x-2 px-4 py-2 rounded-lg border-2 hover:bg-gray-50 transition-colors"
+                style={{borderColor: '#585182', color: '#585182'}}
+              >
+                <MessageCircle size={20} />
+                <span className="hidden sm:inline">Messages</span>
+              </button>
+              <button className="p-2 rounded-lg hover:bg-gray-100 relative">
+                <Bell size={20} style={{color: '#585182'}} />
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+              </button>
+              <div className="w-8 h-8 rounded-full flex items-center justify-center text-lg" style={{backgroundColor: '#585182', color: 'white'}}>
+                👤
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <button className="bg-white/20 p-2 rounded-full hover:bg-white/30 transition-all">
-            <Bell className="w-5 h-5 text-white" />
-          </button>
-          <button className="bg-white/20 p-2 rounded-full hover:bg-white/30 transition-all">
-            <Settings className="w-5 h-5 text-white" />
-          </button>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <h3 className="font-semibold text-lg mb-4" style={{color: '#585182'}}>Categories</h3>
+              <div className="space-y-2">
+                {categories.map((category) => {
+                  const Icon = category.icon;
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.name)}
+                      className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                        selectedCategory === category.name ? 'bg-gray-100' : 'hover:bg-gray-50'
+                      }`}
+                    >
+                      <Icon size={18} style={{color: category.color}} />
+                      <span className="text-sm font-medium">{category.name}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mt-6">
+              <h3 className="font-semibold text-lg mb-4" style={{color: '#585182'}}>Community Stats</h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Active Members</span>
+                  <span className="font-semibold">1,247</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Discussions</span>
+                  <span className="font-semibold">892</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Advisors Online</span>
+                  <span className="font-semibold text-green-600">12</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="lg:col-span-3">
+            {/* Search and Create Post */}
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  <input
+                    type="text"
+                    placeholder="Search discussions..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent"
+                    style={{focusRingColor: '#585182'}}
+                  />
+                </div>
+                <button 
+                  className="px-6 py-3 text-white rounded-lg hover:opacity-90 transition-opacity flex items-center space-x-2"
+                  style={{backgroundColor: '#585182'}}
+                >
+                  <Plus size={20} />
+                  <span>New Post</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Posts */}
+            <div className="space-y-6">
+              {filteredPosts.map((post) => (
+                <div key={post.id} className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl bg-gray-100">
+                      {post.avatar}
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold text-lg">{post.author}</h4>
+                          <div className="flex items-center space-x-2 text-sm text-gray-500">
+                            <span>{post.role}</span>
+                            {post.isAdvisor && <Shield size={14} className="text-blue-500" />}
+                            <span>•</span>
+                            <span>{post.time}</span>
+                          </div>
+                        </div>
+                        <button className="p-2 rounded-lg hover:bg-gray-100">
+                          <MoreHorizontal size={20} className="text-gray-400" />
+                        </button>
+                      </div>
+                      
+                      <div className="mt-4">
+                        <h3 className="font-semibold text-xl mb-2">{post.title}</h3>
+                        <p className="text-gray-700 leading-relaxed">{post.content}</p>
+                      </div>
+
+                      <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+                        <div className="flex items-center space-x-6">
+                          <button className={`flex items-center space-x-2 hover:bg-gray-50 px-3 py-1 rounded-lg transition-colors ${
+                            post.isLiked ? 'text-red-500' : 'text-gray-600'
+                          }`}>
+                            <Heart size={18} fill={post.isLiked ? 'currentColor' : 'none'} />
+                            <span className="text-sm font-medium">{post.likes}</span>
+                          </button>
+                          <button className="flex items-center space-x-2 text-gray-600 hover:bg-gray-50 px-3 py-1 rounded-lg transition-colors">
+                            <MessageSquare size={18} />
+                            <span className="text-sm font-medium">{post.comments}</span>
+                          </button>
+                        </div>
+                        <button className="text-sm font-medium hover:bg-gray-50 px-3 py-1 rounded-lg transition-colors" style={{color: '#585182'}}>
+                          Join Discussion
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 
-  const CategoryFilter = () => (
-    <div className="p-4 bg-white border-b">
-      <div className="flex items-center justify-between mb-3">
-        <h3 className="font-semibold text-gray-800">Topics</h3>
-        <button 
-          onClick={() => setShowCreatePost(true)}
-          className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center hover:from-purple-600 hover:to-pink-600 transition-all"
-        >
-          <Plus className="w-4 h-4 mr-1" />
-          New Post
-        </button>
-      </div>
-      <div className="flex overflow-x-auto space-x-2 pb-2">
-        {categories.map(category => {
-          const Icon = category.icon;
-          return (
+  const ChatPage = () => (
+    <div className="h-screen bg-gray-50 flex">
+      {/* Chat Sidebar */}
+      <div className="w-full sm:w-80 bg-white border-r border-gray-200 flex flex-col">
+        {/* Chat Header */}
+        <div className="p-4 border-b border-gray-200">
+          <div className="flex items-center justify-between mb-4">
+            <button 
+              onClick={() => setCurrentPage('community')}
+              className="p-2 rounded-lg hover:bg-gray-100 sm:hidden"
+            >
+              <ArrowLeft size={20} style={{color: '#585182'}} />
+            </button>
+            <h2 className="text-xl font-bold" style={{color: '#585182'}}>Messages</h2>
+            <button className="p-2 rounded-lg hover:bg-gray-100">
+              <Plus size={20} style={{color: '#585182'}} />
+            </button>
+          </div>
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+            <input
+              type="text"
+              placeholder="Search conversations..."
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:border-transparent"
+              style={{focusRingColor: '#585182'}}
+            />
+          </div>
+        </div>
+
+        {/* Chat List */}
+        <div className="flex-1 overflow-y-auto">
+          {chats.map((chat) => (
             <button
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
-              className={`flex items-center px-3 py-2 rounded-full whitespace-nowrap text-sm font-medium transition-all ${
-                selectedCategory === category.id
-                  ? 'bg-gradient-to-r ' + category.color + ' text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              key={chat.id}
+              onClick={() => setSelectedChat(chat)}
+              className={`w-full p-4 flex items-center space-x-3 hover:bg-gray-50 border-b border-gray-100 ${
+                selectedChat?.id === chat.id ? 'bg-blue-50' : ''
               }`}
             >
-              <Icon className="w-4 h-4 mr-2" />
-              {category.name}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-
-  const CommunityPost = ({ post }) => {
-    const categoryInfo = categories.find(cat => cat.id === post.category);
-    const CategoryIcon = categoryInfo?.icon || Globe;
-    
-    return (
-      <div className="bg-white rounded-xl shadow-sm border p-6 mb-4">
-        <div className="flex items-start space-x-4">
-          <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-lg">
-            {post.user.avatar}
-          </div>
-          <div className="flex-1">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center space-x-2">
-                <span className="font-semibold text-gray-900">{post.user.name}</span>
-                {post.user.isAdvisor && (
-                  <span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs font-medium flex items-center">
-                    <Shield className="w-3 h-3 mr-1" />
-                    Advisor
-                  </span>
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full flex items-center justify-center text-2xl bg-gray-100">
+                  {chat.avatar}
+                </div>
+                {chat.isOnline && (
+                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                 )}
-                <span className="text-gray-500 text-sm flex items-center">
-                  <CategoryIcon className="w-3 h-3 mr-1" />
-                  {categoryInfo?.name}
-                </span>
               </div>
-              <span className="text-gray-400 text-sm flex items-center">
-                <Clock className="w-3 h-3 mr-1" />
-                {post.timestamp}
-              </span>
-            </div>
-            
-            <h3 className="font-semibold text-gray-900 mb-2">{post.title}</h3>
-            <p className="text-gray-700 mb-4">{post.content}</p>
-            
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <button className={`flex items-center space-x-1 px-3 py-1 rounded-full text-sm transition-all ${
-                  post.isLiked ? 'bg-pink-100 text-pink-600' : 'bg-gray-100 text-gray-600 hover:bg-pink-100 hover:text-pink-600'
-                }`}>
-                  <ThumbsUp className="w-4 h-4" />
-                  <span>{post.likes}</span>
-                </button>
-                <button className="flex items-center space-x-1 px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 hover:bg-purple-100 hover:text-purple-600 transition-all">
-                  <MessageCircle className="w-4 h-4" />
-                  <span>{post.replies}</span>
-                </button>
-              </div>
-              <button 
-                onClick={() => {
-                  setSelectedChatUser(post.user);
-                  setShowPrivateChat(true);
-                }}
-                className="text-purple-600 hover:text-purple-700 text-sm font-medium"
-              >
-                Message User
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const AdvisorCard = ({ advisor }) => (
-    <div className="bg-gradient-to-br from-white to-purple-50 rounded-xl p-6 border shadow-sm">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-lg">
-            {advisor.avatar}
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-900">{advisor.name}</h3>
-            <p className="text-sm text-gray-600">{advisor.speciality}</p>
-          </div>
-        </div>
-        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-          advisor.status === 'online' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
-        }`}>
-          {advisor.status}
-        </span>
-      </div>
-      
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-1">
-          <Star className="w-4 h-4 text-yellow-500 fill-current" />
-          <span className="text-sm font-medium">{advisor.rating}</span>
-          <span className="text-xs text-gray-500">({advisor.experience})</span>
-        </div>
-      </div>
-      
-      <div className="flex space-x-2">
-        <button 
-          onClick={() => {
-            setSelectedChatUser(advisor);
-            setShowPrivateChat(true);
-          }}
-          className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:from-purple-600 hover:to-pink-600 transition-all flex items-center justify-center"
-        >
-          <MessageCircle className="w-4 h-4 mr-1" />
-          Chat
-        </button>
-        <button className="bg-white border border-purple-200 text-purple-600 p-2 rounded-lg hover:bg-purple-50 transition-all">
-          <Video className="w-4 h-4" />
-        </button>
-        <button className="bg-white border border-purple-200 text-purple-600 p-2 rounded-lg hover:bg-purple-50 transition-all">
-          <Phone className="w-4 h-4" />
-        </button>
-      </div>
-    </div>
-  );
-
-  const ChatList = () => (
-    <div className="space-y-3">
-      {recentChats.map(chat => (
-        <div 
-          key={chat.id}
-          onClick={() => {
-            setSelectedChatUser(chat);
-            setShowPrivateChat(true);
-          }}
-          className="flex items-center space-x-3 p-3 bg-white rounded-xl hover:bg-purple-50 cursor-pointer transition-all border"
-        >
-          <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-lg">
-            {chat.avatar}
-          </div>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between">
-              <h4 className="font-medium text-gray-900 truncate">{chat.name}</h4>
-              <span className="text-xs text-gray-500">{chat.time}</span>
-            </div>
-            <p className="text-sm text-gray-600 truncate">{chat.lastMessage}</p>
-          </div>
-          {chat.unread > 0 && (
-            <span className="bg-pink-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              {chat.unread}
-            </span>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-
-  const PrivateChatModal = () => {
-    if (!showPrivateChat || !selectedChatUser) return null;
-    
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl max-w-md w-full max-h-[80vh] flex flex-col">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-t-xl flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white">
-                {selectedChatUser.avatar}
-              </div>
-              <div>
-                <h3 className="text-white font-semibold">{selectedChatUser.name}</h3>
-                <p className="text-purple-100 text-sm">
-                  {selectedChatUser.isAdvisor ? 'Mental Health Advisor' : 'Community Member'}
-                </p>
-              </div>
-            </div>
-            <button 
-              onClick={() => setShowPrivateChat(false)}
-              className="text-white hover:bg-white/20 p-1 rounded"
-            >
-              ×
-            </button>
-          </div>
-          
-          <div className="flex-1 p-4 overflow-y-auto">
-            <div className="space-y-3">
-              <div className="flex justify-start">
-                <div className="bg-gray-100 p-3 rounded-xl max-w-xs">
-                  <p className="text-sm">Hi! Thanks for reaching out.</p>
-                  <span className="text-xs text-gray-500">2 min ago</span>
+              <div className="flex-1 text-left">
+                <div className="flex items-center justify-between">
+                  <h4 className="font-semibold text-sm">{chat.name}</h4>
+                  <span className="text-xs text-gray-500">{chat.time}</span>
                 </div>
+                <div className="flex items-center justify-between">
+                  <p className="text-sm text-gray-600 truncate">{chat.lastMessage}</p>
+                  {chat.unread > 0 && (
+                    <span className="ml-2 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                      {chat.unread}
+                    </span>
+                  )}
+                </div>
+                <span className="text-xs text-gray-400">{chat.role}</span>
               </div>
-              <div className="flex justify-end">
-                <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-xl max-w-xs">
-                  <p className="text-sm">I'd love to discuss the strategies you mentioned.</p>
-                  <span className="text-xs text-purple-100">1 min ago</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Chat Content */}
+      <div className={`flex-1 flex flex-col ${selectedChat ? 'block' : 'hidden sm:flex'}`}>
+        {selectedChat ? (
+          <>
+            {/* Chat Header */}
+            <div className="p-4 bg-white border-b border-gray-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <button 
+                    onClick={() => setSelectedChat(null)}
+                    className="p-2 rounded-lg hover:bg-gray-100 sm:hidden"
+                  >
+                    <ArrowLeft size={20} />
+                  </button>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-xl bg-gray-100">
+                    {selectedChat.avatar}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">{selectedChat.name}</h3>
+                    <p className="text-sm text-gray-500">{selectedChat.role}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button className="p-2 rounded-lg hover:bg-gray-100">
+                    <Phone size={20} className="text-gray-600" />
+                  </button>
+                  <button className="p-2 rounded-lg hover:bg-gray-100">
+                    <Video size={20} className="text-gray-600" />
+                  </button>
+                  <button className="p-2 rounded-lg hover:bg-gray-100">
+                    <MoreHorizontal size={20} className="text-gray-600" />
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div className="p-4 border-t">
-            <div className="flex space-x-2">
-              <input
-                type="text"
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder="Type your message..."
-                className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-              <button className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all">
-                <Send className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
-  const CreatePostModal = () => {
-    if (!showCreatePost) return null;
-    
-    return (
-      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl max-w-lg w-full">
-          <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-t-xl flex items-center justify-between">
-            <h3 className="text-white font-semibold">Create New Post</h3>
-            <button 
-              onClick={() => setShowCreatePost(false)}
-              className="text-white hover:bg-white/20 p-1 rounded"
-            >
-              ×
-            </button>
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+              {messages.map((message) => (
+                <div key={message.id} className={`flex ${message.isSelf ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`flex items-end space-x-2 max-w-xs lg:max-w-md ${message.isSelf ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-lg bg-gray-100 flex-shrink-0">
+                      {message.avatar}
+                    </div>
+                    <div className={`px-4 py-2 rounded-2xl ${
+                      message.isSelf 
+                        ? 'text-white' 
+                        : 'bg-gray-200 text-gray-900'
+                    }`} style={message.isSelf ? {backgroundColor: '#585182'} : {}}>
+                      <p className="text-sm">{message.content}</p>
+                      <p className={`text-xs mt-1 ${message.isSelf ? 'text-white opacity-75' : 'text-gray-500'}`}>
+                        {message.time}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Message Input */}
+            <div className="p-4 bg-white border-t border-gray-200">
+              <div className="flex items-center space-x-2">
+                <button className="p-2 rounded-lg hover:bg-gray-100">
+                  <Paperclip size={20} className="text-gray-600" />
+                </button>
+                <div className="flex-1 relative">
+                  <input
+                    type="text"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Type your message..."
+                    className="w-full px-4 py-3 bg-gray-100 rounded-full focus:ring-2 focus:ring-offset-0 focus:bg-white border-transparent"
+                    style={{focusRingColor: '#585182'}}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  />
+                  <button className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 rounded-lg hover:bg-gray-200">
+                    <Smile size={18} className="text-gray-600" />
+                  </button>
+                </div>
+                <button 
+                  onClick={handleSendMessage}
+                  className="p-3 rounded-full text-white hover:opacity-90 transition-opacity"
+                  style={{backgroundColor: '#585182'}}
+                >
+                  <Send size={18} />
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="flex-1 flex items-center justify-center bg-gray-50">
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-4" style={{backgroundColor: '#585182', color: 'white'}}>
+                💬
+              </div>
+              <h3 className="text-xl font-semibold mb-2" style={{color: '#585182'}}>Select a conversation</h3>
+              <p className="text-gray-500">Choose from your existing conversations or start a new one</p>
+            </div>
           </div>
-          
-          <div className="p-6 space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
-              <select className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
-                {categories.slice(1).map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.name}</option>
-                ))}
-              </select>
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
-              <input
-                type="text"
-                placeholder="What would you like to discuss?"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Content</label>
-              <textarea
-                rows={4}
-                placeholder="Share your thoughts, experiences, or questions..."
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
-              />
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              <input type="checkbox" id="anonymous" className="rounded" />
-              <label htmlFor="anonymous" className="text-sm text-gray-600">Post anonymously</label>
-            </div>
-            
-            <div className="flex space-x-3">
-              <button 
-                onClick={() => setShowCreatePost(false)}
-                className="flex-1 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-all"
-              >
-                Cancel
-              </button>
-              <button className="flex-1 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all">
-                Post
-              </button>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
-    );
-  };
+    </div>
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
-      <div className="max-w-6xl mx-auto p-4">
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <Header />
-          
-          {/* Navigation Tabs */}
-          <div className="bg-white border-b">
-            <div className="flex overflow-x-auto">
-              {[
-                { id: 'community', name: 'Community Feed', icon: Globe },
-                { id: 'advisors', name: 'Advisors', icon: UserCheck },
-                { id: 'chats', name: 'Messages', icon: MessageCircle }
-              ].map(tab => {
-                const Icon = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`flex items-center px-6 py-4 font-medium whitespace-nowrap transition-all ${
-                      activeTab === tab.id
-                        ? 'text-purple-600 border-b-2 border-purple-600 bg-purple-50'
-                        : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'
-                    }`}
-                  >
-                    <Icon className="w-5 h-5 mr-2" />
-                    {tab.name}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="min-h-[600px]">
-            {activeTab === 'community' && (
-              <div>
-                <CategoryFilter />
-                <div className="p-6">
-                  {communityPosts.map(post => (
-                    <CommunityPost key={post.id} post={post} />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'advisors' && (
-              <div className="p-6">
-                <div className="mb-6">
-                  <h2 className="text-xl font-bold text-gray-800 mb-2">Mental Health Advisors</h2>
-                  <p className="text-gray-600">Connect with qualified professionals for personalized guidance</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {advisors.map(advisor => (
-                    <AdvisorCard key={advisor.id} advisor={advisor} />
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {activeTab === 'chats' && (
-              <div className="p-6">
-                <div className="mb-6">
-                  <h2 className="text-xl font-bold text-gray-800 mb-2">Messages</h2>
-                  <p className="text-gray-600">Private conversations with community members and advisors</p>
-                </div>
-                <ChatList />
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      
-      <PrivateChatModal />
-      <CreatePostModal />
+    <div className="font-sans">
+      {currentPage === 'community' ? <CommunityPage /> : <ChatPage />}
     </div>
   );
 };
 
-export default CommunityPage;
+export default CommunityPlatform;
