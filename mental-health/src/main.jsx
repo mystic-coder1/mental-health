@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Homepage from './homepage.jsx'
+import Homepage from './pages/homepage.jsx';
+import Category from './pages/category.jsx';
+
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
