@@ -4,16 +4,30 @@ import Homepage from './pages/homepage'
 import Category from './pages/category.jsx'
 import DoctorLogin from './pages/logindoctor'
 import Community from './pages/communitypage'
-
+import App from './App';
 
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Homepage />
-    <Category />
-    <DoctorLogin />
-    <Community />
-
+    
   </React.StrictMode>,
+
+  <React.StrictMode>
+    <Category />
+  </React.StrictMode>,
+
+    <React.StrictMode>
+    <Community />
+  </React.StrictMode>,
+
+   <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+
+
+
+
+
 )

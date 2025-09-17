@@ -1,146 +1,713 @@
-import React, { useState } from 'react';
-import ReactPlayer from 'react-player';
-import { MessageCircle, Users, Brain, Heart, Plus, Bell } from 'lucide-react';
-// import { Brain } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+// import './App.css';
 
-// import Homepage from './pages/homepage';
+const App = () => {
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState([
+    {
+      text: "Hello! I'm here to provide support and guidance. Feel free to share what's on your mind, and I'll do my best to help.",
+      sender: 'ai',
+      timestamp: Date.now()
+    },
+    {
+      text: "🌟 You're not alone in this journey.",
+      sender: 'ai',
+      timestamp: Date.now() + 1000
+    }
+  ]);
+  const [currentMessage, setCurrentMessage] = useState('');
+  const chatMessagesRef = useRef(null);
 
-const sampleVideos = [
-  {
-    title: "Managing Stress and Anxiety",
-    description: "Learn techniques to reduce stress and anxiety effectively.",
-    url: "https://www.youtube.com/watch?v=ysz5S6PUM-U",
-    thumbnail: "https://img.youtube.com/vi/ysz5S6PUM-U/0.jpg",
-  },
-  {
-    title: "Building Healthy Habits",
-    description: "Form lasting positive habits to support your mental health.",
-    url: "https://www.youtube.com/watch?v=jNQXAC9IVRw",
-    thumbnail: "https://img.youtube.com/vi/jNQXAC9IVRw/0.jpg",
-  },
-  {
-    title: "Mindfulness Techniques for Beginners",
-    description: "A gentle introduction to mindfulness practices.",
-    url: "https://www.youtube.com/watch?v=inpok4MKVLM",
-    thumbnail: "https://img.youtube.com/vi/inpok4MKVLM/0.jpg",
-  },
-  {
-    title: "How to Cope with Negative Thoughts",
-    description: "Effective ways to challenge negative thinking patterns.",
-    url: "https://www.youtube.com/watch?v=ZToicYcHIOU",
-    thumbnail: "https://img.youtube.com/vi/ZToicYcHIOU/0.jpg",
-  },
-];
+  const videoLectures = [
+    {
+      id: 'stress-anxiety',
+      title: 'Managing Stress and Anxiety',
+      description: 'Learn practical techniques to identify triggers and develop healthy coping mechanisms for daily stress management.',
+      thumbnail: '🧘‍♀️'
+    },
+    {
+      id: 'healthy-habits',
+      title: 'Building Healthy Habits',
+      description: 'Discover how small, consistent changes can transform your mental well-being and create lasting positive impact.',
+      thumbnail: '🌱'
+    },
+    {
+      id: 'mindfulness',
+      title: 'Mindfulness Techniques for Beginners',
+      description: 'Start your mindfulness journey with simple, effective techniques you can practice anywhere, anytime.',
+      thumbnail: '🧠'
+    },
+    {
+      id: 'negative-thoughts',
+      title: 'How to Cope with Negative Thoughts',
+      description: 'Understand the nature of negative thinking patterns and learn evidence-based strategies to overcome them.',
+      thumbnail: '💭'
+    }
+  ];
 
-function App() {
-  const [userName, setUserName] = useState("Alex");
-  const [journalSummary] = useState(
-    "Today I felt a bit overwhelmed but managed to meditate for 10 minutes. Feeling slightly better."
-  );
-  const [selectedVideo, setSelectedVideo] = useState(null);
-  const [showChatbot, setShowChatbot] = useState(false);
+  const journalEntries = [
+    {
+      date: 'Today, September 17, 2025',
+      text: 'Started my morning with a 10-minute meditation session. Felt more centered and ready to tackle the day. The breathing exercises from yesterday\'s video really helped...'
+    },
+    {
+      date: 'Yesterday',
+      text: 'Had a challenging conversation at work, but I managed to stay calm and communicate my feelings clearly. Progress!'
+    }
+  ];
+
+  const communityStories = [
+    {
+      text: 'After months of anxiety, I finally found peace through the mindfulness videos. The community support made all the difference in my recovery journey.',
+      author: 'Anonymous Community Member'
+    },
+    {
+      text: 'Journaling became my safe space. Writing down my thoughts helped me understand my emotions better and track my progress over time.',
+      author: 'Sarah M.'
+    },
+    {
+      text: 'The expert lectures gave me tools I never knew existed. Now I help others in my community using what I\'ve learned here.',
+      author: 'Alex R.'
+    }
+  ];
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const playVideo = (videoId) => {
+    const video = videoLectures.find(v => v.id === videoId);
+    alert(`Playing video: ${video.title}\n\nIn a real implementation, this would open the video player with the selected content.`);
+  };
+
+  const openJournal = () => {
+    alert('Opening full journal view...\n\nIn a real implementation, this would navigate to your complete journal with all entries, writing tools, and progress tracking.');
+  };
+
+  const openCommunity = () => {
+    alert('Opening community page...\n\nIn a real implementation, this would show the full community section with more stories, support groups, and discussion forums.');
+  };
+
+  const toggleChat = () => {
+    setChatOpen(!chatOpen);
+  };
+
+  const handleChatInput = (e) => {
+    if (e.key === 'Enter' && currentMessage.trim()) {
+      const userMessage = {
+        text: currentMessage.trim(),
+        sender: 'user',
+        timestamp: Date.now()
+      };
+      
+      setChatMessages(prev => [...prev, userMessage]);
+      setCurrentMessage('');
+      
+      // Simulate AI response
+      setTimeout(() => {
+        const responses = [
+          "Thank you for sharing that with me. It takes courage to reach out. Can you tell me more about what you're experiencing?",
+          "I hear you, and your feelings are completely valid. Let's work through this together. Have you tried any breathing exercises today?",
+          "That sounds really challenging. Remember, it's okay to take things one step at a time. Would you like me to guide you through a quick mindfulness exercise?",
+          "You're taking positive steps by reaching out. That shows real strength. How has your day been overall?",
+          "I'm here to support you. If you're in crisis, please don't hesitate to contact a professional helpline. For now, let's focus on some grounding techniques."
+        ];
+        
+        const aiMessage = {
+          text: responses[Math.floor(Math.random() * responses.length)],
+          sender: 'ai',
+          timestamp: Date.now()
+        };
+        
+        setChatMessages(prev => [...prev, aiMessage]);
+      }, 1500);
+    }
+  };
+
+  useEffect(() => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+    }
+  }, [chatMessages]);
+
+  // Close chat when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (chatOpen && 
+          !event.target.closest('.chat-modal') && 
+          !event.target.closest('.emergency-support')) {
+        setChatOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [chatOpen]);
 
   return (
-    <div className="bg-white min-h-screen text-gray-800 p-6 font-sans">
-      
+    <div className="app">
+      {/* Header */}
+      <header className="header">
+        <div className="container">
+          <nav className="nav">
+            <div className="logo">🧠 MindWell</div>
+            <ul className="nav-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#videos">Videos</a></li>
+              <li><a href="#journal">Journal</a></li>
+              <li><a href="#community">Community</a></li>
+              <li><a href="#support">Support</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
       {/* Welcome Section */}
-      <section className="text-center p-8 rounded-lg bg-gradient-to-r from-blue-100 via-green-100 to-blue-100">
-        <h1 className="text-3xl font-semibold mb-4">
-          Hello, {userName}. How are you feeling today?
-        </h1>
-        <p className="text-gray-600">Take a moment for yourself 🌿</p>
-      </section>
-
-      {/* Guided Video Lectures Section */}
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-4">
-          👉 Start Your Healing Journey with Expert-Guided Video Lectures
-        </h2>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {sampleVideos.map((video, idx) => (
-            <div key={idx} className="border rounded shadow p-4">
-              <img
-                src={video.thumbnail}
-                alt={video.title}
-                className="rounded cursor-pointer"
-                onClick={() => setSelectedVideo(video)}
-              />
-              <h3 className="font-semibold mt-2">{video.title}</h3>
-              <p className="text-sm text-gray-600">{video.description}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Video Player Modal */}
-        {selectedVideo && (
-          <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-            <div className="bg-white p-4 rounded max-w-2xl w-full">
-              <button
-                className="text-gray-600 float-right"
-                onClick={() => setSelectedVideo(null)}
-              >
-                ✕ Close
-              </button>
-              <h3 className="text-xl font-semibold mb-2">{selectedVideo.title}</h3>
-              <ReactPlayer url={selectedVideo.url} controls width="100%" />
-            </div>
+      <section className="welcome-section">
+        <div className="container">
+          <h1>Hello, <span className="username">Alex</span>.</h1>
+          <p>How are you feeling today?</p>
+          <div className="mood-indicator">
+            <span className="mood-emoji">😊</span>
+            <span>Feeling optimistic today</span>
           </div>
-        )}
-      </section>
-
-      {/* Daily Journal Snapshot */}
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-2">📓 Today's Journal Snapshot</h2>
-        <p className="text-gray-700 italic">{journalSummary}</p>
-        <button
-          className="mt-3 px-4 py-2 bg-[#585182] text-white rounded hover:bg-[#48406a]"
-        >
-          View Full Journal
-        </button>
-      </section>
-
-      {/* Community Spotlights */}
-      <section className="mt-10">
-        <h2 className="text-2xl font-semibold mb-4">🌟 Community Spotlights</h2>
-        <div className="overflow-x-auto flex space-x-4">
-          {Array(5).fill(0).map((_, idx) => (
-            <div key={idx} className="w-64 bg-gray-100 p-4 rounded shadow">
-              <p className="italic">"Sharing my story helped me heal more than I expected!"</p>
-              <button className="mt-2 px-3 py-1 bg-[#585182] text-white rounded">
-                Read more
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Floating Chatbot Button */}
-      <button
-        className="fixed bottom-5 right-5 bg-[#585182] text-white p-4 rounded-full shadow-lg"
-        onClick={() => setShowChatbot(!showChatbot)}
-      >
-        🧠 Chat with AI Support
-      </button>
-
-      {showChatbot && (
-        <div className="fixed bottom-20 right-5 bg-white border rounded shadow-lg p-4 w-80">
-          <h3 className="font-semibold mb-2">AI Support Chat</h3>
-          <div className="h-40 overflow-y-auto bg-gray-100 p-2 rounded mb-2">
-            <p><em>How can I assist you today?</em></p>
-          </div>
-          <input
-            type="text"
-            placeholder="Type your concern..."
-            className="w-full border p-2 rounded"
-          />
-          <button className="mt-2 px-4 py-2 bg-[#585182] text-white rounded w-full">
-            Send
+          <br /><br />
+          <button className="cta-button" onClick={() => scrollToSection('videos')}>
+            Start Your Journey
           </button>
         </div>
+      </section>
+
+      {/* Main Content */}
+      <main className="main-content">
+        {/* Video Lectures Section */}
+        <section id="videos" className="content-section">
+          <div className="container">
+            <h2 className="section-title">🎥 Start Your Healing Journey with Expert-Guided Video Lectures</h2>
+            <p className="section-subtitle">Discover curated content designed to support your mental wellness journey</p>
+            
+            <div className="video-grid">
+              {videoLectures.map((video) => (
+                <div key={video.id} className="video-card">
+                  <div className="video-thumbnail" onClick={() => playVideo(video.id)}>
+                    <div className="thumbnail-bg">
+                      <span className="thumbnail-emoji">{video.thumbnail}</span>
+                    </div>
+                    <div className="play-button">▶️</div>
+                  </div>
+                  <h3 className="video-title">{video.title}</h3>
+                  <p className="video-description">{video.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Daily Journal Section */}
+        <section id="journal" className="journal-section">
+          <div className="container">
+            <h2 className="section-title">📖 Daily Journal Snapshot</h2>
+            <p className="section-subtitle">Reflect on your thoughts and track your emotional journey</p>
+            
+            <div className="journal-snapshot">
+              {journalEntries.map((entry, index) => (
+                <div key={index} className="journal-entry">
+                  <div className="entry-date">{entry.date}</div>
+                  <div className="entry-text">"{entry.text}"</div>
+                </div>
+              ))}
+              <button className="cta-button" onClick={openJournal}>View Full Journal</button>
+            </div>
+          </div>
+        </section>
+
+        {/* Community Spotlights */}
+        <section id="community" className="community-section">
+          <div className="container">
+            <h2 className="section-title">💬 Community Spotlights</h2>
+            <p className="section-subtitle">Find inspiration in shared experiences and collective healing</p>
+            
+            <div className="story-carousel">
+              {communityStories.map((story, index) => (
+                <div key={index} className="story-card">
+                  <div className="story-text">"{story.text}"</div>
+                  <div className="story-author">- {story.author}</div>
+                  <button className="read-more-btn" onClick={openCommunity}>Read More</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Emergency Support Button */}
+      <button className="emergency-support" onClick={toggleChat} title="Chat with AI Support">
+        💬
+      </button>
+
+      {/* Chat Modal */}
+      {chatOpen && (
+        <div className="chat-modal">
+          <div className="chat-header">
+            <div>🤖 AI Support - Here to Help</div>
+          </div>
+          <div className="chat-messages" ref={chatMessagesRef}>
+            {chatMessages.map((message, index) => (
+              <div
+                key={index}
+                className={`message ${message.sender}`}
+                style={{
+                  marginBottom: '15px',
+                  padding: '10px 15px',
+                  borderRadius: '15px',
+                  maxWidth: '80%',
+                  backgroundColor: message.sender === 'user' ? '#585182' : '#f0f0f0',
+                  color: message.sender === 'user' ? 'white' : '#333',
+                  marginLeft: message.sender === 'user' ? 'auto' : '0',
+                  textAlign: message.sender === 'user' ? 'right' : 'left'
+                }}
+              >
+                {message.text}
+              </div>
+            ))}
+          </div>
+          <div className="chat-input-area">
+            <input
+              type="text"
+              className="chat-input"
+              placeholder="Type your message here..."
+              value={currentMessage}
+              onChange={(e) => setCurrentMessage(e.target.value)}
+              onKeyPress={handleChatInput}
+            />
+          </div>
+        </div>
       )}
+
+      <style jsx>{`
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        .app {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: white;
+          min-height: 100vh;
+          color: #333;
+        }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+          padding: 20px 0;
+          background: #585182;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .logo {
+          font-size: 28px;
+          font-weight: bold;
+          color: white;
+        }
+
+        .nav-links {
+          display: flex;
+          gap: 30px;
+          list-style: none;
+        }
+
+        .nav-links a {
+          color: white;
+          text-decoration: none;
+          font-weight: 500;
+          transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+          opacity: 0.8;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+          padding: 80px 0;
+          text-align: center;
+          background: linear-gradient(135deg, #f8f9ff 0%, #e8edff 100%);
+          margin: 0;
+          border-bottom: 1px solid #e9ecef;
+        }
+
+        .welcome-section h1 {
+          font-size: 48px;
+          color: #2c3e50;
+          margin-bottom: 20px;
+          font-weight: 300;
+        }
+
+        .welcome-section .username {
+          color: #585182;
+          font-weight: 600;
+        }
+
+        .welcome-section p {
+          font-size: 24px;
+          color: #555;
+          margin-bottom: 40px;
+        }
+
+        .mood-indicator {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          margin-top: 20px;
+          padding: 15px 25px;
+          background: rgba(88, 81, 130, 0.1);
+          border-radius: 50px;
+          border: 2px solid rgba(88, 81, 130, 0.2);
+        }
+
+        .mood-emoji {
+          font-size: 24px;
+        }
+
+        .cta-button {
+          background: #585182;
+          color: white;
+          padding: 15px 40px;
+          border: none;
+          border-radius: 50px;
+          font-size: 18px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(88, 81, 130, 0.4);
+        }
+
+        .cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(88, 81, 130, 0.6);
+          background: #4a4070;
+        }
+
+        /* Main Content */
+        .main-content {
+          background: white;
+        }
+
+        .content-section {
+          padding: 60px 40px;
+        }
+
+        .section-title {
+          font-size: 36px;
+          font-weight: 700;
+          margin-bottom: 15px;
+          color: #2c3e50;
+        }
+
+        .section-subtitle {
+          font-size: 18px;
+          color: #7f8c8d;
+          margin-bottom: 40px;
+        }
+
+        /* Video Lectures Section */
+        .video-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 30px;
+          margin-top: 40px;
+        }
+
+        .video-card {
+          background: #f8f9fa;
+          border-radius: 15px;
+          padding: 25px;
+          transition: all 0.3s ease;
+          border: 1px solid #e9ecef;
+          cursor: pointer;
+        }
+
+        .video-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-thumbnail {
+          height: 180px;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 20px;
+          position: relative;
+          cursor: pointer;
+          overflow: hidden;
+        }
+
+        .thumbnail-bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .thumbnail-emoji {
+          font-size: 48px;
+          opacity: 0.3;
+        }
+
+        .play-button {
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 50%;
+          width: 60px;
+          height: 60px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+          color: #585182;
+          transition: all 0.3s ease;
+          position: relative;
+          z-index: 2;
+        }
+
+        .play-button:hover {
+          background: white;
+          transform: scale(1.1);
+        }
+
+        .video-title {
+          font-size: 20px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          color: #2c3e50;
+        }
+
+        .video-description {
+          color: #7f8c8d;
+          font-size: 14px;
+          line-height: 1.6;
+        }
+
+        /* Journal Section */
+        .journal-section {
+          background: #f8f9fa;
+          padding: 60px 40px;
+        }
+
+        .journal-snapshot {
+          background: white;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+          margin-top: 30px;
+        }
+
+        .journal-entry {
+          border-left: 4px solid #585182;
+          padding-left: 20px;
+          margin-bottom: 20px;
+        }
+
+        .entry-date {
+          font-size: 14px;
+          color: #7f8c8d;
+          margin-bottom: 10px;
+        }
+
+        .entry-text {
+          font-style: italic;
+          color: #555;
+          line-height: 1.6;
+        }
+
+        /* Community Section */
+        .community-section {
+          padding: 60px 40px;
+        }
+
+        .story-carousel {
+          display: flex;
+          gap: 30px;
+          margin-top: 40px;
+          overflow-x: auto;
+          padding: 20px 0;
+        }
+
+        .story-card {
+          min-width: 350px;
+          background: #fff;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+          border-left: 4px solid #585182;
+        }
+
+        .story-text {
+          font-style: italic;
+          color: #555;
+          margin-bottom: 20px;
+          line-height: 1.7;
+        }
+
+        .story-author {
+          font-weight: 600;
+          color: #585182;
+        }
+
+        .read-more-btn {
+          background: transparent;
+          color: #585182;
+          border: 2px solid #585182;
+          padding: 10px 25px;
+          border-radius: 25px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-top: 15px;
+        }
+
+        .read-more-btn:hover {
+          background: #585182;
+          color: white;
+        }
+
+        /* Emergency Support Button */
+        .emergency-support {
+          position: fixed;
+          bottom: 30px;
+          right: 30px;
+          background: #585182;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 70px;
+          height: 70px;
+          font-size: 24px;
+          cursor: pointer;
+          box-shadow: 0 6px 20px rgba(88, 81, 130, 0.4);
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
+
+        .emergency-support:hover {
+          transform: scale(1.1);
+          box-shadow: 0 8px 25px rgba(88, 81, 130, 0.6);
+        }
+
+        /* Chat Modal */
+        .chat-modal {
+          position: fixed;
+          bottom: 120px;
+          right: 30px;
+          width: 350px;
+          height: 500px;
+          background: white;
+          border-radius: 20px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+          z-index: 1001;
+          overflow: hidden;
+          border: 1px solid #e9ecef;
+        }
+
+        .chat-header {
+          background: #585182;
+          color: white;
+          padding: 20px;
+          font-weight: 600;
+        }
+
+        .chat-messages {
+          height: 350px;
+          padding: 20px;
+          overflow-y: auto;
+        }
+
+        .chat-input-area {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: 20px;
+          background: #f8f9fa;
+          border-top: 1px solid #e9ecef;
+        }
+
+        .chat-input {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ddd;
+          border-radius: 25px;
+          outline: none;
+          font-family: inherit;
+        }
+
+        .chat-input:focus {
+          border-color: #585182;
+          box-shadow: 0 0 0 3px rgba(88, 81, 130, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .nav-links {
+            display: none;
+          }
+
+          .welcome-section h1 {
+            font-size: 32px;
+          }
+
+          .section-title {
+            font-size: 28px;
+          }
+
+          .video-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .story-carousel {
+            flex-direction: column;
+          }
+
+          .story-card {
+            min-width: 100%;
+          }
+
+          .chat-modal {
+            width: 90%;
+            right: 5%;
+          }
+
+          .content-section {
+            padding: 40px 20px;
+          }
+
+          .journal-section {
+            padding: 40px 20px;
+          }
+        }
+      `}</style>
     </div>
   );
-}
+};
 
 export default App;

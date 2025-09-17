@@ -4,19 +4,19 @@ import Homepage from './pages/homepage';
 import Category from './pages/category';
 import DoctorLogin from './pages/logindoctor';
 import Community from './pages/communitypage';
-import { createBrowserRouter } from 'react-router-dom';
+// import { createBrowserRouter } from 'react-router-dom';
 import './App.css';
 
 
 function App() {
-  const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <> <Homepage /> </>
-  }
+  // const router = createBrowserRouter([
+  // {
+  //   path: "/",
+  //   element: <> <Homepage /> </>
+  // }
 
 
-  ])
+  // ])
 
 
   return (
