@@ -38,6 +38,8 @@ import Category from './pages/category';
 import Community from './pages/communitypage';
 import DoctorLogin from './pages/logindoctor';
 import StudentLogin from './pages/loginstudent';
+import Counsellor from './pages/counsellor';
+
 
 function App() {
   return (
@@ -47,6 +49,7 @@ function App() {
       <Route path="/community" element={<Community />} />
       <Route path="/doctor-login" element={<DoctorLogin />} />
       <Route path="/student-login" element={<StudentLogin />} />
+      <Route path="/counsellor" element={<Counsellor />} />
     </Routes>
   );
 }
