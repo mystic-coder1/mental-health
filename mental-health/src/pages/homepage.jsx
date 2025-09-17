@@ -146,36 +146,35 @@ const App = () => {
   }, [chatOpen]);
 
   return (
-    <div className="app">
+    <div className="min-h-screen bg-white text-gray-800 font-sans">
       {/* Header */}
-      <header className="header">
-        <div className="container">
-          <nav className="nav">
-            <div className="logo">🧠 MindWell</div>
-            <ul className="nav-links">
-              <li><a href="#home">Home</a></li>
-              <li><a href="#videos">Videos</a></li>
-              <li><a href="#journal">Journal</a></li>
-              <li><a href="#community">Community</a></li>
-              <li><a href="#support">Support</a></li>
-            </ul>
-          </nav>
+      <header className="w-full bg-[#585182] shadow-md py-4">
+        <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
+          <div className="text-2xl font-bold text-white">🧠 MindWell</div>
+          <ul className="hidden md:flex gap-8 list-none">
+            <li><a href="#home" className="text-white font-medium hover:opacity-80 transition">Home</a></li>
+            <li><a href="#videos" className="text-white font-medium hover:opacity-80 transition">Videos</a></li>
+            <li><a href="#journal" className="text-white font-medium hover:opacity-80 transition">Journal</a></li>
+            <li><a href="#community" className="text-white font-medium hover:opacity-80 transition">Community</a></li>
+            <li><a href="#support" className="text-white font-medium hover:opacity-80 transition">Support</a></li>
+          </ul>
         </div>
       </header>
 
       {/* Welcome Section */}
-      <section className="welcome-section">
-        <div className="container">
-          <h1>Hello, <span className="username">Alex</span>.</h1>
-          <p>How are you feeling today?</p>
-          <div className="mood-indicator">
-            <span className="mood-emoji">😊</span>
-            <span>Feeling optimistic today</span>
+      <section className="py-20 text-center bg-gradient-to-br from-blue-50 to-indigo-50 border-b border-gray-200">
+        <div className="max-w-3xl mx-auto px-4">
+          <h1 className="text-4xl sm:text-5xl font-light text-gray-900 mb-6">Hello, <span className="text-[#585182] font-semibold">Alex</span>.</h1>
+          <p className="text-xl sm:text-2xl text-gray-700 mb-8">How are you feeling today?</p>
+          <div className="inline-flex items-center gap-3 mt-4 px-6 py-3 bg-[#585182]/10 border-2 border-[#585182]/20 rounded-full">
+            <span className="text-2xl">😊</span>
+            <span className="text-base sm:text-lg">Feeling optimistic today</span>
           </div>
-          <br /><br />
-          <button className="cta-button" onClick={() => scrollToSection('videos')}>
-            Start Your Journey
-          </button>
+          <div className="mt-10">
+            <button className="bg-[#585182] text-white px-8 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-[#4a4070] transition" onClick={() => scrollToSection('videos')}>
+              Start Your Journey
+            </button>
+          </div>
         </div>
       </section>
 
