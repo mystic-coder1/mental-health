@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -117,9 +118,12 @@ export default function LoginPage() {
           <div className="mt-8 text-center">
             <p className="text-sm text-gray-600">
               Don't have an account?{' '}
-              <a href="#" className="text-[#585182] hover:text-[#4a4570] font-medium transition-colors duration-200">
+              <Link
+                to="/student-account"
+                className="text-[#585182] hover:text-[#4a4570] font-medium transition-colors duration-200"
+              >
                 Create one here
-              </a>
+              </Link>
             </p>
           </div>
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function MindMateLandingPage() {
   const handleDoctorClick = () => {
@@ -53,12 +54,12 @@ export default function MindMateLandingPage() {
                     Join as a licensed mental health professional. Provide expert care, manage patient relationships, 
                     and make a meaningful impact.
                   </p>
-                  <button
-                    onClick={handleDoctorClick}
-                    className="w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium rounded-xl hover:from-purple-600 hover:to-indigo-600 focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:-translate-y-1"
+                  <Link
+                    to="/doctor-login"
+                    className="block w-full px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-medium rounded-xl hover:from-purple-600  focus:outline-none focus:ring-4 focus:ring-purple-300 transition-all duration-300 transform hover:-translate-y-1 text-center"
                   >
                     Continue as Doctor
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -77,12 +78,12 @@ export default function MindMateLandingPage() {
                     Access mental health resources, connect with professionals, track your wellness journey, 
                     and find the support you need.
                   </p>
-                  <button
-                    onClick={handleStudentClick}
-                    className="w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium rounded-xl hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:-translate-y-1"
+                  <Link
+                    to="/student-login"
+                    className="block w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-medium rounded-xl hover:from-blue-600 hover:to-cyan-600 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:-translate-y-1 text-center"
                   >
                     Continue as Student
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
