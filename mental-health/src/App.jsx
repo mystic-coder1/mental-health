@@ -43,6 +43,7 @@ import Chatbot from './pages/chatbot';
 import StudentAccount from './pages/studentaccount';
 import AR from './pages/ARpage';
 import BeforeLogin from './pages/beforelogin';
+import Session from './pages/sessionwithstudent';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
       <Route path="/student-account" element={<StudentAccount  />} />  
       <Route path="/arpage" element={<AR  />} />  
       <Route path="/beforelogin" element={<BeforeLogin  />} />  
+      <Route path="/session" element={<Session  />} />  
     </Routes>
   );
 }
