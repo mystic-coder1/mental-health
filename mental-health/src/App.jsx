@@ -39,6 +39,7 @@ import Community from './pages/communitypage';
 import DoctorLogin from './pages/logindoctor';
 import StudentLogin from './pages/loginstudent';
 import Counsellor from './pages/counsellor';
+import Chatbot from './pages/chatbot';
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
       <Route path="/doctor-login" element={<DoctorLogin />} />
       <Route path="/student-login" element={<StudentLogin />} />
       <Route path="/counsellor" element={<Counsellor />} />
+      <Route path="/chatbot" element={<Chatbot  />} />  
     </Routes>
   );
 }
