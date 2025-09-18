@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Brain, Heart, Moon, Flame, Cloud, BookOpen, ArrowRight, Sparkles, Users, Star, CheckCircle, ArrowLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const App = () => {
   const [currentStep, setCurrentStep] = useState('welcome');
@@ -926,14 +927,15 @@ const App = () => {
       </div>
 
       <div className="text-center">
-        <button
+        <Link
+          to="/"
           onClick={resetAssessment}
           className="inline-flex items-center px-8 py-4 text-lg font-medium text-white rounded-xl transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl mr-4"
           style={{background: `linear-gradient(135deg, #585182, #6366f1)`}}
         >
           <ArrowLeft className="w-5 h-5 mr-2" />
-          Take Another Assessment
-        </button>
+          Home
+        </Link>
         
         <button
           className="inline-flex items-center px-8 py-4 text-lg font-medium border-2 rounded-xl transition-all duration-200 hover:shadow-lg"

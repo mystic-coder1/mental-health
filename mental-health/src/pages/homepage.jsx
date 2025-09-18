@@ -155,24 +155,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-white text-gray-800 font-sans">
       {/* Header */}
-      <nav className="fixed top-0 left-0 right-0 w-full bg-[#585182] shadow-lg z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              <div className="text-2xl font-bold text-white">Mind Mate</div>
-            </div>
-            <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <a href="#home" className="text-white hover:text-opacity-80 px-3 py-2 transition-colors">Home</a>
-                <a href="#videos" className="text-white hover:text-opacity-80 px-3 py-2 transition-colors">Videos</a>
-                <a href="#journal" className="text-white hover:text-opacity-80 px-3 py-2 transition-colors">Journal</a>
-                <a href="#community" className="text-white hover:text-opacity-80 px-3 py-2 transition-colors">Community</a>
-                <a href="#support" className="text-white hover:text-opacity-80 px-3 py-2 transition-colors">Support</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+    
 
       {/* Main Content */}
       <main className="pt-16 min-h-screen bg-[#f8fafc]">

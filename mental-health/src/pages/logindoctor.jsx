@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// export default function LoginDoc() {
-//   return <div>Login Doctor Page</div>;
-// }
 const DoctorLoginPage = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -67,13 +64,13 @@ const DoctorLoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md mx-auto">
+        <div className="text-center mb-6 sm:mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             {isLogin ? 'Welcome Back' : 'Join Our Network'}
           </h1>
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600 px-4 sm:px-0">
             {isLogin 
               ? 'Sign in to help patients with their mental health journey'
               : 'Register as a verified mental health professional'
@@ -81,7 +78,7 @@ const DoctorLoginPage = () => {
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {!isLogin && (
             <>
               <div>
@@ -94,7 +91,7 @@ const DoctorLoginPage = () => {
                   name="fullName"
                   value={formData.fullName}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="Dr. John Smith"
                   required
                 />
@@ -109,7 +106,7 @@ const DoctorLoginPage = () => {
                   name="specialization"
                   value={formData.specialization}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   required
                 >
                   <option value="">Select your specialization</option>
@@ -132,7 +129,7 @@ const DoctorLoginPage = () => {
                   name="yearsOfExperience"
                   value={formData.yearsOfExperience}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="5"
                   min="0"
                   max="50"
@@ -150,7 +147,7 @@ const DoctorLoginPage = () => {
                   value={formData.qualifications}
                   onChange={handleInputChange}
                   rows="3"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                   placeholder="MD in Psychiatry from Harvard Medical School, Board Certified in Psychiatry..."
                   required
                 />
@@ -169,7 +166,7 @@ const DoctorLoginPage = () => {
                   name="licenseNumber"
                   value={formData.licenseNumber}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="MD123456789"
                   required
                 />
@@ -188,7 +185,7 @@ const DoctorLoginPage = () => {
                   name="medicalBoard"
                   value={formData.medicalBoard}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="California Medical Board"
                   required
                 />
@@ -204,7 +201,7 @@ const DoctorLoginPage = () => {
                   value={formData.clinicAddress}
                   onChange={handleInputChange}
                   rows="2"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
                   placeholder="123 Wellness Street, Suite 456, City, State 12345"
                   required
                 />
@@ -220,7 +217,7 @@ const DoctorLoginPage = () => {
                   name="phoneNumber"
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="+1 (555) 123-4567"
                   required
                 />
@@ -238,7 +235,7 @@ const DoctorLoginPage = () => {
               name="email"
               value={formData.email}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="doctor@clinic.com"
               required
             />
@@ -254,7 +251,7 @@ const DoctorLoginPage = () => {
               name="password"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               placeholder="••••••••"
               minLength="8"
               required
@@ -262,7 +259,7 @@ const DoctorLoginPage = () => {
           </div>
 
           {!isLogin && (
-            <div className="bg-blue-50 border border-blue-200 rounded-md p-3 text-sm text-blue-700">
+            <div className="bg-blue-50 border border-blue-200 rounded-md p-3 text-xs sm:text-sm text-blue-700">
               <strong>Verification Process:</strong> Your credentials will be verified within 24-48 hours. 
               We check your license status with the medical board and may contact your practice for confirmation.
             </div>
@@ -272,14 +269,14 @@ const DoctorLoginPage = () => {
             type="button"
             onClick={handleSubmit}
             style={{ backgroundColor: '#585182' }}
-            className="w-full text-white py-2 px-4 rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-200"
+            className="w-full text-white py-2 px-4 text-sm sm:text-base rounded-md hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-200"
           >
             {isLogin ? 'Sign In' : 'Submit Application'}
           </button>
         </div>
 
-        <div className="text-center mt-6">
-          <p className="text-sm text-gray-600">
+        <div className="text-center mt-4 sm:mt-6">
+          <p className="text-xs sm:text-sm text-gray-600">
             {isLogin ? "Don't have an account? " : "Already registered? "}
             <button
               onClick={toggleMode}
@@ -291,14 +288,14 @@ const DoctorLoginPage = () => {
         </div>
 
         {isLogin && (
-          <div className="text-center mt-4">
-            <a href="#" className="text-sm text-gray-500 hover:text-gray-700">
+          <div className="text-center mt-3 sm:mt-4">
+            <a href="#" className="text-xs sm:text-sm text-gray-500 hover:text-gray-700">
               Forgot your password?
             </a>
           </div>
         )}
 
-        <div className="mt-8 text-center">
+        <div className="mt-6 sm:mt-8 text-center px-4 sm:px-0">
           <p className="text-xs text-gray-500">
             By continuing, you agree to our commitment to patient privacy and professional standards in mental healthcare.
           </p>

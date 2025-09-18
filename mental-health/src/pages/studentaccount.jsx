@@ -162,17 +162,18 @@ const StudentRegistrationPage = () => {
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">Personal Information</h3>
       
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
             First Name *
           </label>
           <input
+            id="firstName"
             type="text"
             name="firstName"
             value={formData.firstName}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.firstName ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="John"
@@ -181,15 +182,16 @@ const StudentRegistrationPage = () => {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
             Last Name *
           </label>
           <input
+            id="lastName"
             type="text"
             name="lastName"
             value={formData.lastName}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.lastName ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Smith"
@@ -199,15 +201,16 @@ const StudentRegistrationPage = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
           Email Address *
         </label>
         <input
+          id="email"
           type="email"
           name="email"
           value={formData.email}
           onChange={handleInputChange}
-          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
             errors.email ? 'border-red-500' : 'border-gray-300'
           }`}
           placeholder="john.smith@university.edu"
@@ -215,17 +218,18 @@ const StudentRegistrationPage = () => {
         {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
             Phone Number *
           </label>
           <input
+            id="phone"
             type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.phone ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="+1 (555) 123-4567"
@@ -234,15 +238,16 @@ const StudentRegistrationPage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
             Date of Birth *
           </label>
           <input
+            id="dateOfBirth"
             type="date"
             name="dateOfBirth"
             value={formData.dateOfBirth}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'
             }`}
           />
@@ -251,14 +256,15 @@ const StudentRegistrationPage = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
           Gender *
         </label>
         <select
+          id="gender"
           name="gender"
           value={formData.gender}
           onChange={handleInputChange}
-          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
             errors.gender ? 'border-red-500' : 'border-gray-300'
           }`}
         >
@@ -277,17 +283,18 @@ const StudentRegistrationPage = () => {
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">Academic Information</h3>
       
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="studentId" className="block text-sm font-medium text-gray-700 mb-1">
             Student ID *
           </label>
           <input
+            id="studentId"
             type="text"
             name="studentId"
             value={formData.studentId}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.studentId ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="STU123456"
@@ -296,14 +303,15 @@ const StudentRegistrationPage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="yearOfStudy" className="block text-sm font-medium text-gray-700 mb-1">
             Year of Study *
           </label>
           <select
+            id="yearOfStudy"
             name="yearOfStudy"
             value={formData.yearOfStudy}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.yearOfStudy ? 'border-red-500' : 'border-gray-300'
             }`}
           >
@@ -319,15 +327,16 @@ const StudentRegistrationPage = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="institution" className="block text-sm font-medium text-gray-700 mb-1">
           Institution/University *
         </label>
         <input
+          id="institution"
           type="text"
           name="institution"
           value={formData.institution}
           onChange={handleInputChange}
-          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
             errors.institution ? 'border-red-500' : 'border-gray-300'
           }`}
           placeholder="University of Example"
@@ -336,15 +345,16 @@ const StudentRegistrationPage = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="program" className="block text-sm font-medium text-gray-700 mb-1">
           Program/Major *
         </label>
         <input
+          id="program"
           type="text"
           name="program"
           value={formData.program}
           onChange={handleInputChange}
-          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+          className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
             errors.program ? 'border-red-500' : 'border-gray-300'
           }`}
           placeholder="Computer Science"
@@ -361,17 +371,18 @@ const StudentRegistrationPage = () => {
         This person will be contacted only in case of emergency or if you're at risk of harm.
       </p>
       
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="emergencyName" className="block text-sm font-medium text-gray-700 mb-1">
             Full Name *
           </label>
           <input
+            id="emergencyName"
             type="text"
             name="emergencyName"
             value={formData.emergencyName}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.emergencyName ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Jane Smith"
@@ -380,15 +391,16 @@ const StudentRegistrationPage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="emergencyRelationship" className="block text-sm font-medium text-gray-700 mb-1">
             Relationship *
           </label>
           <input
+            id="emergencyRelationship"
             type="text"
             name="emergencyRelationship"
             value={formData.emergencyRelationship}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.emergencyRelationship ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="Mother, Father, Guardian, etc."
@@ -397,17 +409,18 @@ const StudentRegistrationPage = () => {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="emergencyPhone" className="block text-sm font-medium text-gray-700 mb-1">
             Phone Number *
           </label>
           <input
+            id="emergencyPhone"
             type="tel"
             name="emergencyPhone"
             value={formData.emergencyPhone}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.emergencyPhone ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="+1 (555) 987-6543"
@@ -416,15 +429,16 @@ const StudentRegistrationPage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="emergencyEmail" className="block text-sm font-medium text-gray-700 mb-1">
             Email Address (Optional)
           </label>
           <input
+            id="emergencyEmail"
             type="email"
             name="emergencyEmail"
             value={formData.emergencyEmail}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
             placeholder="jane.smith@email.com"
           />
         </div>
@@ -443,16 +457,16 @@ const StudentRegistrationPage = () => {
         <label className="block text-sm font-medium text-gray-700 mb-2">
           What mental health concerns bring you here today? * (Select all that apply)
         </label>
-        <div className="grid sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-gray-200 rounded-md p-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-48 overflow-y-auto border border-gray-200 rounded-md p-3">
           {mentalHealthOptions.map((option) => (
-            <label key={option} className="flex items-center space-x-2 text-sm">
+            <label key={option} className="flex items-center space-x-2 text-sm cursor-pointer">
               <input
                 type="checkbox"
                 name="mentalHealthConcerns"
                 value={option}
                 checked={formData.mentalHealthConcerns.includes(option)}
                 onChange={handleInputChange}
-                className="text-purple-600 focus:ring-purple-500"
+                className="text-purple-600 focus:ring-purple-500 rounded"
               />
               <span>{option}</span>
             </label>
@@ -467,7 +481,7 @@ const StudentRegistrationPage = () => {
         </label>
         <div className="space-y-2">
           {urgencyLevels.map((level) => (
-            <label key={level.value} className="flex items-start space-x-2">
+            <label key={level.value} className="flex items-start space-x-2 cursor-pointer">
               <input
                 type="radio"
                 name="urgencyLevel"
@@ -484,59 +498,63 @@ const StudentRegistrationPage = () => {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label htmlFor="previousTherapy" className="block text-sm font-medium text-gray-700 mb-1">
           Previous Therapy Experience (Optional)
         </label>
         <textarea
+          id="previousTherapy"
           name="previousTherapy"
           value={formData.previousTherapy}
           onChange={handleInputChange}
           rows="3"
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors resize-vertical"
           placeholder="Please describe any previous therapy or counseling experience..."
         />
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="currentMedications" className="block text-sm font-medium text-gray-700 mb-1">
             Current Medications (Optional)
           </label>
           <textarea
+            id="currentMedications"
             name="currentMedications"
             value={formData.currentMedications}
             onChange={handleInputChange}
             rows="2"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors resize-vertical"
             placeholder="List any medications you're currently taking..."
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="allergies" className="block text-sm font-medium text-gray-700 mb-1">
             Allergies (Optional)
           </label>
           <textarea
+            id="allergies"
             name="allergies"
             value={formData.allergies}
             onChange={handleInputChange}
             rows="2"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors resize-vertical"
             placeholder="List any known allergies..."
           />
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="preferredTherapistGender" className="block text-sm font-medium text-gray-700 mb-1">
             Preferred Therapist Gender (Optional)
           </label>
           <select
+            id="preferredTherapistGender"
             name="preferredTherapistGender"
             value={formData.preferredTherapistGender}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
           >
             <option value="">No preference</option>
             <option value="male">Male</option>
@@ -546,15 +564,16 @@ const StudentRegistrationPage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="preferredLanguage" className="block text-sm font-medium text-gray-700 mb-1">
             Preferred Language (Optional)
           </label>
           <input
+            id="preferredLanguage"
             type="text"
             name="preferredLanguage"
             value={formData.preferredLanguage}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors"
             placeholder="English, Spanish, etc."
           />
         </div>
@@ -566,17 +585,18 @@ const StudentRegistrationPage = () => {
     <div className="space-y-4">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">Account Security & Consent</h3>
       
-      <div className="grid sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
             Password *
           </label>
           <input
+            id="password"
             type="password"
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.password ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="••••••••"
@@ -585,15 +605,16 @@ const StudentRegistrationPage = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
             Confirm Password *
           </label>
           <input
+            id="confirmPassword"
             type="password"
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleInputChange}
-            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 ${
+            className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors ${
               errors.confirmPassword ? 'border-red-500' : 'border-gray-300'
             }`}
             placeholder="••••••••"
@@ -605,30 +626,30 @@ const StudentRegistrationPage = () => {
       <div className="space-y-4 bg-gray-50 p-4 rounded-md">
         <h4 className="font-medium text-gray-800">Required Consents</h4>
         
-        <label className="flex items-start space-x-3">
+        <label className="flex items-start space-x-3 cursor-pointer">
           <input
             type="checkbox"
             name="privacyConsent"
             checked={formData.privacyConsent}
             onChange={handleInputChange}
-            className={`mt-1 text-purple-600 focus:ring-purple-500 ${
+            className={`mt-1 text-purple-600 focus:ring-purple-500 rounded ${
               errors.privacyConsent ? 'border-red-500' : ''
             }`}
           />
           <span className="text-sm text-gray-700">
-            I have read and agree to the <a href="#" className="text-purple-600 underline">Privacy Policy</a> and 
-            <a href="#" className="text-purple-600 underline ml-1">Terms of Service</a>. I understand that my information will be kept confidential and secure. *
+            I have read and agree to the <a href="#" className="text-purple-600 underline hover:text-purple-800">Privacy Policy</a> and 
+            <a href="#" className="text-purple-600 underline hover:text-purple-800 ml-1">Terms of Service</a>. I understand that my information will be kept confidential and secure. *
           </span>
         </label>
         {errors.privacyConsent && <p className="text-red-500 text-xs">{errors.privacyConsent}</p>}
 
-        <label className="flex items-start space-x-3">
+        <label className="flex items-start space-x-3 cursor-pointer">
           <input
             type="checkbox"
             name="emergencyConsent"
             checked={formData.emergencyConsent}
             onChange={handleInputChange}
-            className={`mt-1 text-purple-600 focus:ring-purple-500 ${
+            className={`mt-1 text-purple-600 focus:ring-purple-500 rounded ${
               errors.emergencyConsent ? 'border-red-500' : ''
             }`}
           />
@@ -638,13 +659,13 @@ const StudentRegistrationPage = () => {
         </label>
         {errors.emergencyConsent && <p className="text-red-500 text-xs">{errors.emergencyConsent}</p>}
 
-        <label className="flex items-start space-x-3">
+        <label className="flex items-start space-x-3 cursor-pointer">
           <input
             type="checkbox"
             name="communicationConsent"
             checked={formData.communicationConsent}
             onChange={handleInputChange}
-            className="mt-1 text-purple-600 focus:ring-purple-500"
+            className="mt-1 text-purple-600 focus:ring-purple-500 rounded"
           />
           <span className="text-sm text-gray-700">
             I agree to receive appointment reminders, wellness tips, and important updates via email and SMS. (Optional)
@@ -674,8 +695,8 @@ const StudentRegistrationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white py-6 sm:py-8">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-6 px-4 sm:py-8 sm:px-6 lg:px-8 flex items-center justify-center">
+      <div className="w-full max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
@@ -688,10 +709,10 @@ const StudentRegistrationPage = () => {
 
         {/* Progress Steps */}
         <div className="mb-6 sm:mb-8">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mb-4">
             {steps.map((step, index) => (
-              <div key={step.number} className="flex flex-col items-center">
-                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold ${
+              <div key={step.number} className="flex flex-col items-center flex-1">
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm sm:text-base font-semibold transition-colors ${
                   currentStep >= step.number
                     ? 'bg-purple-600 text-white'
                     : 'bg-gray-300 text-gray-600'
@@ -710,7 +731,7 @@ const StudentRegistrationPage = () => {
           </div>
           
           {/* Progress Bar */}
-          <div className="mt-4 relative">
+          <div className="relative">
             <div className="absolute top-0 left-0 h-2 bg-gray-300 rounded-full w-full"></div>
             <div 
               className="absolute top-0 left-0 h-2 bg-purple-600 rounded-full transition-all duration-300"
@@ -720,47 +741,52 @@ const StudentRegistrationPage = () => {
         </div>
 
         {/* Form Content */}
-        <div className="bg-white border border-gray-200 rounded-lg p-6 sm:p-8 shadow-lg">
-          {renderCurrentStep()}
-          
-          {/* Navigation Buttons */}
-          <div className="flex flex-col sm:flex-row justify-between items-center mt-8 space-y-3 sm:space-y-0">
-            <button
-              onClick={handlePrevious}
-              disabled={currentStep === 1}
-              className={`px-6 py-2 rounded-md text-sm sm:text-base font-medium transition-all ${
-                currentStep === 1
-                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                  : 'bg-gray-600 text-white hover:bg-gray-700'
-              }`}
-            >
-              Previous
-            </button>
+        <div className="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 lg:p-8 shadow-lg">
+          <form onSubmit={(e) => e.preventDefault()}>
+            {renderCurrentStep()}
+            
+            {/* Navigation Buttons */}
+            <div className="flex flex-col sm:flex-row justify-between items-center mt-8 space-y-3 sm:space-y-0">
+              <button
+                type="button"
+                onClick={handlePrevious}
+                disabled={currentStep === 1}
+                className={`px-6 py-2 rounded-md text-sm sm:text-base font-medium transition-all ${
+                  currentStep === 1
+                    ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    : 'bg-gray-600 text-white hover:bg-gray-700'
+                }`}
+              >
+                Previous
+              </button>
 
-            <div className="text-center">
-              <span className="text-sm text-gray-600">
-                Step {currentStep} of {steps.length}
-              </span>
+              <div className="text-center">
+                <span className="text-sm text-gray-600">
+                  Step {currentStep} of {steps.length}
+                </span>
+              </div>
+
+              {currentStep < 5 ? (
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  style={{ backgroundColor: '#585182' }}
+                  className="px-6 py-2 text-white rounded-md text-sm sm:text-base font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all"
+                >
+                  Next Step
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  style={{ backgroundColor: '#585182' }}
+                  className="px-6 py-2 text-white rounded-md text-sm sm:text-base font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-all"
+                >
+                  Create Account
+                </button>
+              )}
             </div>
-
-            {currentStep < 5 ? (
-              <button
-                onClick={handleNext}
-                style={{ backgroundColor: '#585182' }}
-                className="px-6 py-2 text-white rounded-md text-sm sm:text-base font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-              >
-                Next Step
-              </button>
-            ) : (
-              <button
-                onClick={handleSubmit}
-                style={{ backgroundColor: '#585182' }}
-                className="px-6 py-2 text-white rounded-md text-sm sm:text-base font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
-              >
-                Create Account
-              </button>
-            )}
-          </div>
+          </form>
         </div>
 
         {/* Support Information */}
@@ -771,21 +797,21 @@ const StudentRegistrationPage = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4 text-xs sm:text-sm">
             <a 
               href="#" 
-              className="text-purple-600 hover:text-purple-800 font-medium"
+              className="text-purple-600 hover:text-purple-800 font-medium transition-colors"
             >
               Contact Support
             </a>
             <span className="hidden sm:inline text-gray-400">|</span>
             <a 
               href="#" 
-              className="text-purple-600 hover:text-purple-800 font-medium"
+              className="text-purple-600 hover:text-purple-800 font-medium transition-colors"
             >
               Registration Help
             </a>
             <span className="hidden sm:inline text-gray-400">|</span>
             <a 
               href="#" 
-              className="text-purple-600 hover:text-purple-800 font-medium"
+              className="text-purple-600 hover:text-purple-800 font-medium transition-colors"
             >
               Privacy Information
             </a>
@@ -799,7 +825,7 @@ const StudentRegistrationPage = () => {
           </p>
           <p className="text-red-600 text-xs sm:text-sm">
             Call the National Suicide Prevention Lifeline: 
-            <a href="tel:988" className="font-bold underline ml-1">988</a> (Available 24/7)
+            <a href="tel:988" className="font-bold underline ml-1 hover:text-red-800">988</a> (Available 24/7)
           </p>
           <p className="text-red-600 text-xs mt-1">
             Or text "HELLO" to 741741 for the Crisis Text Line
@@ -810,7 +836,7 @@ const StudentRegistrationPage = () => {
         <div className="text-center mt-6">
           <p className="text-sm text-gray-600">
             Already have an account? 
-            <a href="#" className="text-purple-600 hover:text-purple-800 font-medium ml-1">
+            <a href="#" className="text-purple-600 hover:text-purple-800 font-medium ml-1 transition-colors">
               Sign in here
             </a>
           </p>

@@ -40,6 +40,7 @@ import DoctorLogin from './pages/logindoctor';
 import StudentLogin from './pages/loginstudent';
 import Counsellor from './pages/counsellor';
 import Chatbot from './pages/chatbot';
+import StudentAccount from './pages/studentaccount';
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
       <Route path="/student-login" element={<StudentLogin />} />
       <Route path="/counsellor" element={<Counsellor />} />
       <Route path="/chatbot" element={<Chatbot  />} />  
+      <Route path="/student-account" element={<StudentAccount  />} />  
     </Routes>
   );
 }
