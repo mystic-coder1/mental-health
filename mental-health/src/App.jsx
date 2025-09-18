@@ -20,7 +20,8 @@ function App() {
       <Route path="/student-login" element={<StudentLogin />} />
       <Route path="/counsellor" element={<Counsellor />} />
       <Route path="/chatbot" element={<Chatbot  />} />  
-      <Route path="/arpage" element={<AR  />} />  
+      <Route path="/arpage" element={<AR  />} /> 
+      <Route path="/studentaccount" element={<account-student  />} />  
     </Routes>
   );
 }
