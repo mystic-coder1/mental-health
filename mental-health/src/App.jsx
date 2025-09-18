@@ -1,36 +1,3 @@
-
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import Homepage from './pages/homepage';
-// import Category from './pages/category';
-// import DoctorLogin from './pages/logindoctor';
-// import Community from './pages/communitypage';
-// // import { createBrowserRouter } from 'react-router-dom';
-// import './App.css';
-
-
-// function App() {
-//   // const router = createBrowserRouter([
-//   // {
-//   //   path: "/",
-//   //   element: <> <Homepage /> </>
-//   // }
-
-
-//   // ])
-
-
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<Homepage />} />
-//         <Route path="/category" element={<Category />} />
-//         <Route path="/logindoc" element={<DoctorLogin />} />
-//         <Route path="/community" element={<Community />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './pages/homepage';
@@ -40,6 +7,7 @@ import DoctorLogin from './pages/logindoctor';
 import StudentLogin from './pages/loginstudent';
 import Counsellor from './pages/counsellor';
 import Chatbot from './pages/chatbot';
+import AR from './pages/ARpage';
 
 
 function App() {
@@ -52,12 +20,9 @@ function App() {
       <Route path="/student-login" element={<StudentLogin />} />
       <Route path="/counsellor" element={<Counsellor />} />
       <Route path="/chatbot" element={<Chatbot  />} />  
+      <Route path="/arpage" element={<AR  />} />  
     </Routes>
   );
 }
 
 export default App;
-
-
-
-
