@@ -42,6 +42,7 @@ import Counsellor from './pages/counsellor';
 import Chatbot from './pages/chatbot';
 import StudentAccount from './pages/studentaccount';
 import AR from './pages/ARpage';
+import BeforeLogin from './pages/beforelogin';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
       <Route path="/chatbot" element={<Chatbot  />} />  
       <Route path="/student-account" element={<StudentAccount  />} />  
       <Route path="/arpage" element={<AR  />} />  
+      <Route path="/beforelogin" element={<BeforeLogin  />} />  
     </Routes>
   );
 }
