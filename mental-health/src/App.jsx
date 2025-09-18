@@ -41,6 +41,7 @@ import StudentLogin from './pages/loginstudent';
 import Counsellor from './pages/counsellor';
 import Chatbot from './pages/chatbot';
 import StudentAccount from './pages/studentaccount';
+import AR from './pages/ARpage';
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
       <Route path="/counsellor" element={<Counsellor />} />
       <Route path="/chatbot" element={<Chatbot  />} />  
       <Route path="/student-account" element={<StudentAccount  />} />  
+      <Route path="/arpage" element={<AR  />} />  
     </Routes>
   );
 }
