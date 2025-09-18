@@ -38,7 +38,7 @@ import Category from './pages/category';
 import Community from './pages/communitypage';
 import DoctorLogin from './pages/logindoctor';
 import StudentLogin from './pages/loginstudent';
-import Counseller from './pages/counsellor';
+import Counsellor from './pages/counsellor';
 import Chatbot from './pages/chatbot';
 import StudentAccount from './pages/studentaccount';
 import AR from './pages/ARpage';
