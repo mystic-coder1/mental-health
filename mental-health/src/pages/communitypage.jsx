@@ -421,10 +421,10 @@ const CommunityPlatform = () => {
                 onClick={() => setSelectedCategory(category.name)}
                 className={`w-full flex items-center justify-between p-3 rounded-xl transition-all duration-200 ${
                   isSelected 
-                    ? 'shadow-md transform scale-105' 
-                    : 'hover:bg-gray-50 hover:shadow-sm'
+                    ? 'shadow-md transform scale-105 bg-[#585182]/10' 
+                    : 'hover:bg-[#585182]/5 hover:shadow-sm'
                 }`}
-                style={isSelected ? {backgroundColor: `${category.color}15`, borderLeft: `4px solid ${category.color}`} : {}}
+                style={isSelected ? {borderLeft: `4px solid #585182`} : {}}
               >
                 <div className="flex items-center space-x-3">
                   <div className="p-2 rounded-lg" style={{backgroundColor: `${category.color}20`}}>
@@ -474,11 +474,11 @@ const CommunityPlatform = () => {
       <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl shadow-lg border border-purple-100 p-6">
         <h3 className="font-bold text-lg mb-4 text-purple-800">Quick Actions</h3>
         <div className="space-y-2">
-          <button className="w-full p-3 rounded-lg bg-white/70 hover:bg-white/90 transition-colors flex items-center space-x-2 text-purple-700 font-medium">
+          <button className="w-full p-3 rounded-lg bg-white/70 hover:bg-[#585182]/10 transition-colors flex items-center space-x-2 text-[#585182] font-medium">
             <Plus size={16} />
             <span>Start Discussion</span>
           </button>
-          <button className="w-full p-3 rounded-lg bg-white/70 hover:bg-white/90 transition-colors flex items-center space-x-2 text-purple-700 font-medium">
+          <button className="w-full p-3 rounded-lg bg-white/70 hover:bg-[#585182]/10 transition-colors flex items-center space-x-2 text-[#585182] font-medium">
             <Search size={16} />
             <span>Find Advisor</span>
           </button>
@@ -495,9 +495,9 @@ const CommunityPlatform = () => {
             <div className="flex items-center space-x-2 sm:space-x-4">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="p-2 rounded-xl hover:bg-gray-100 lg:hidden transition-colors"
+                className="p-2 rounded-xl hover:bg-[#585182]/10 lg:hidden transition-colors text-[#585182]"
               >
-                <Menu size={20} style={{color: '#585182'}} />
+                <Menu size={20} />
               </button>
               <div className="relative">
                 <div 
@@ -610,8 +610,7 @@ const CommunityPlatform = () => {
                   />
                 </div>
                 <button 
-                  className="px-4 sm:px-8 py-3 sm:py-4 text-white rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 font-semibold transform hover:scale-105"
-                  style={{background: 'linear-gradient(135deg, #585182 0%, #7C73B8 100%)'}}
+                  className="px-4 sm:px-8 py-3 sm:py-4 text-white rounded-lg sm:rounded-xl hover:shadow-lg transition-all duration-200 flex items-center justify-center space-x-2 font-semibold transform hover:scale-105 bg-[#585182] hover:bg-[#4a4570]"
                 >
                   <Plus size={18} className="sm:w-5 sm:h-5" />
                   <span className="text-sm sm:text-base">New Post</span>
@@ -707,7 +706,7 @@ const CommunityPlatform = () => {
                             <span className="font-semibold text-sm sm:text-base">{post.comments}</span>
                           </button>
                         </div>
-                        <button className="font-semibold hover:bg-purple-50 px-2 sm:px-4 py-1 sm:py-2 rounded-lg transition-all text-sm sm:text-base" style={{color: '#585182'}}>
+                        <button className="font-semibold hover:bg-[#585182]/10 px-2 sm:px-4 py-1 sm:py-2 rounded-lg transition-all text-sm sm:text-base text-[#585182]">
                           <span className="hidden sm:inline">Join Discussion →</span>
                           <span className="sm:hidden">Join →</span>
                         </button>

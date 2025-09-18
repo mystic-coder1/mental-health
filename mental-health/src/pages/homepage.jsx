@@ -150,7 +150,7 @@ const App = () => {
       {/* Header */}
       <header className="w-full bg-[#585182] shadow-md py-4">
         <div className="max-w-6xl mx-auto px-4 flex items-center justify-between">
-          <div className="text-2xl font-bold text-white">🧠 MindWell</div>
+          <div className="text-2xl font-bold text-white">Mind Mate</div>
           <ul className="hidden md:flex gap-8 list-none">
             <li><a href="#home" className="text-white font-medium hover:opacity-80 transition">Home</a></li>
             <li><a href="#videos" className="text-white font-medium hover:opacity-80 transition">Videos</a></li>
@@ -164,7 +164,7 @@ const App = () => {
       {/* Welcome Section */}
       <section className="py-20 text-center bg-gradient-to-br from-blue-50 to-indigo-50 border-b border-gray-200">
         <div className="max-w-3xl mx-auto px-4">
-          <h1 className="text-4xl sm:text-5xl font-light text-gray-900 mb-6">Hello, <span className="text-[#585182] font-semibold">Alex</span>.</h1>
+          <h1 className="text-4xl sm:text-5xl font-light text-gray-900 mb-6">Hello, <span className="text-[#585182] font-semibold">Rohan </span>.</h1>
           <p className="text-xl sm:text-2xl text-gray-700 mb-8">How are you feeling today?</p>
           <div className="inline-flex items-center gap-3 mt-4 px-6 py-3 bg-[#585182]/10 border-2 border-[#585182]/20 rounded-full">
             <span className="text-2xl">😊</span>
