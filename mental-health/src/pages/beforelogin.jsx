@@ -18,9 +18,8 @@ export default function MindMateLandingPage() {
         {/* Animated Header Section */}
         <div className="text-center mb-8 md:mb-12 animate-fade-in">
           <div className="inline-block">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 bg-clip-text text-transparent mb-2 animate-gradient">
-              MindMate
-            </h1>
+           <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold bg-gradient-to-r from-purple-600 via-indigo-500 to-blue-500 bg-clip-text text-transparent mb-2 animate-gradient">MindMate</h1>
+             
             <div className="h-1 w-24 md:w-32 bg-gradient-to-r from-purple-400 to-indigo-400 mx-auto rounded-full animate-pulse"></div>
           </div>
           
