@@ -59,7 +59,7 @@ function App() {
       <Route path="/chatbot" element={<Chatbot  />} />  
       <Route path="/student-account" element={<StudentAccount  />} />  
       <Route path="/arpage" element={<AR  />} />  
-      <Route path="/start" element={<BeforeLogin  />} />  
+      <Route path="/" element={<BeforeLogin  />} />  
       <Route path="/session" element={<Session  />} />  
 
     </Routes>

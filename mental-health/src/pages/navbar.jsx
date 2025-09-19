@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Menu, X, Users, Play, Eye, Calendar, LogIn, UserPlus, Heart } from 'lucide-react';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,7 +15,10 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <div 
+            onClick={() => navigate('/')}
+            className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity"
+          >
             <div className="relative">
               <div 
                 className="w-10 h-10 rounded-full flex items-center justify-center shadow-md"
@@ -35,30 +40,44 @@ const Navbar = () => {
 
           {/* Desktop Navigation - Single Line */}
           <div className="hidden lg:flex items-center space-x-4">
-            <button className="px-4 py-2 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2">
+            <button 
+              onClick={() => navigate('/community')}
+              className="px-4 py-2 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2"
+            >
               <Users className="w-4 h-4" />
               <span>Community</span>
             </button>
-            <button className="px-4 py-2 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2">
+            <button 
+              onClick={() => navigate('/videos')}
+              className="px-4 py-2 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2"
+            >
               <Play className="w-4 h-4" />
               <span>Videos</span>
             </button>
-            <button className="px-4 py-2 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2">
+            <button 
+              onClick={() => navigate('/arpage')}
+              className="px-4 py-2 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2"
+            >
               <Eye className="w-4 h-4" />
               <span>AR Features</span>
             </button>
             <button 
+              onClick={() => navigate('/counsellor')}
               className="px-4 py-2 text-white rounded-lg font-medium hover:opacity-90 transition-all duration-200 flex items-center space-x-2"
               style={{ backgroundColor: '#585182' }}
             >
               <Calendar className="w-4 h-4" />
               <span>Book Session</span>
             </button>
-            <button className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2">
+            <button 
+              onClick={() => navigate('/loginstudent')}
+              className="px-4 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium flex items-center space-x-2"
+            >
               <LogIn className="w-4 h-4" />
               <span>Sign In</span>
             </button>
             <button 
+              onClick={() => navigate('/loginstudent')}
               className="px-4 py-2 text-white rounded-lg font-medium hover:opacity-90 transition-all duration-200 flex items-center space-x-2"
               style={{ backgroundColor: '#585182' }}
             >
@@ -82,14 +101,14 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="lg:hidden bg-white border-t border-gray-100">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <MobileNavButton icon={Users} text="Community" />
-              <MobileNavButton icon={Play} text="Videos" />
-              <MobileNavButton icon={Eye} text="AR Features" />
-              <MobileBookSessionButton />
+              <MobileNavButton icon={Users} text="Community" onClick={() => navigate('/community')} />
+              <MobileNavButton icon={Play} text="Videos" onClick={() => navigate('/videos')} />
+              <MobileNavButton icon={Eye} text="AR Features" onClick={() => navigate('/arpage')} />
+              <MobileBookSessionButton onClick={() => navigate('/counsellor')} />
               <div className="pt-4 border-t border-gray-200 mt-4">
                 <div className="flex flex-col space-y-2">
-                  <MobileSignInButton />
-                  <MobileSignUpButton />
+                  <MobileSignInButton onClick={() => navigate('/loginstudent')} />
+                  <MobileSignUpButton onClick={() => navigate('/loginstudent')} />
                 </div>
               </div>
             </div>
@@ -136,15 +155,19 @@ const SignUpButton = () => (
 );
 
 // Mobile Navigation Components
-const MobileNavButton = ({ icon: Icon, text }) => (
-  <button className="flex items-center space-x-3 w-full px-3 py-3 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium">
+const MobileNavButton = ({ icon: Icon, text, onClick }) => (
+  <button 
+    onClick={onClick}
+    className="flex items-center space-x-3 w-full px-3 py-3 text-gray-700 hover:text-gray-900 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium"
+  >
     <Icon className="w-5 h-5" />
     <span>{text}</span>
   </button>
 );
 
-const MobileBookSessionButton = () => (
+const MobileBookSessionButton = ({ onClick }) => (
   <button 
+    onClick={onClick}
     className="flex items-center space-x-3 w-full px-3 py-3 text-white rounded-lg font-semibold hover:opacity-90 transition-all duration-200 shadow-md"
     style={{ backgroundColor: '#585182' }}
   >
@@ -153,15 +176,19 @@ const MobileBookSessionButton = () => (
   </button>
 );
 
-const MobileSignInButton = () => (
-  <button className="flex items-center space-x-3 w-full px-3 py-3 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium">
+const MobileSignInButton = ({ onClick }) => (
+  <button 
+    onClick={onClick}
+    className="flex items-center space-x-3 w-full px-3 py-3 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-200 font-medium"
+  >
     <LogIn className="w-5 h-5" />
     <span>Sign In</span>
   </button>
 );
 
-const MobileSignUpButton = () => (
+const MobileSignUpButton = ({ onClick }) => (
   <button 
+    onClick={onClick}
     className="flex items-center space-x-3 w-full px-3 py-3 text-white rounded-lg font-medium hover:opacity-90 transition-all duration-200"
     style={{ backgroundColor: '#585182' }}
   >
@@ -238,4 +265,4 @@ const DemoPage = () => {
   );
 };
 
-export default DemoPage;
+export default Navbar;

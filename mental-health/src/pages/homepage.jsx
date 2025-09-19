@@ -338,6 +338,8 @@
 
 // export default HomePage;
 {/* Quick Access Features */}import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Navbar from './navbar.jsx';
 import { 
   Heart, 
   Users, 
@@ -359,6 +361,7 @@ import {
 } from 'lucide-react';
 
 const StudentDashboard = () => {
+  const navigate = useNavigate();
   const [chatbotOpen, setChatbotOpen] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
 
@@ -486,9 +489,10 @@ const StudentDashboard = () => {
 
   return (
     <div className="min-h-screen bg-white relative">
+      <Navbar />
       <FloatingElements />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 pt-8 pb-8">
         {/* Header */}
         <div className="text-center mb-12">
           <div className="mb-6">
@@ -515,7 +519,7 @@ const StudentDashboard = () => {
             description="AR-guided yoga, meditation, and workshops for stress management and relaxation"
             icon={Heart}
             buttonText="Start Session"
-            onClick={() => {}}
+            onClick={() => navigate('/arpage')}
           />
 
           {/* AR Integration Hub */}
@@ -524,7 +528,7 @@ const StudentDashboard = () => {
             description="Enhance mental wellness using Augmented Reality technology for immersive healing experiences"
             icon={Eye}
             buttonText="Explore AR"
-            onClick={() => {}}
+            onClick={() => navigate('/arpage')}
           />
 
           {/* Mental Health Videos */}
@@ -551,7 +555,7 @@ const StudentDashboard = () => {
             description="Connect with peers and advisors for guidance, support, and shared experiences"
             icon={Users}
             buttonText="Join Community"
-            onClick={() => {}}
+            onClick={() => navigate('/community')}
           />
 
           {/* Therapy Sessions */}
