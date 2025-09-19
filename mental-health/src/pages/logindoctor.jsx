@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DoctorLoginPage = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -39,10 +41,13 @@ const DoctorLoginPage = () => {
   const handleSubmit = () => {
     if (isLogin) {
       console.log('Login attempt:', { email: formData.email, password: formData.password });
-      // Handle login logic here
+      // Navigate to counsellor page on login
+      navigate('/counsellor');
     } else {
       console.log('Registration attempt:', formData);
-      // Handle registration logic here
+      // Show a success message for registration and navigate to counsellor page
+      alert('Application submitted successfully! You will be redirected to the counsellor page.');
+      navigate('/counsellor');
     }
   };
 

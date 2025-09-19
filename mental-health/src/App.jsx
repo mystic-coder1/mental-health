@@ -46,10 +46,11 @@ import BeforeLogin from './pages/beforelogin';
 import Session from './pages/sessionwithstudent';
 
 
+
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Homepage />} />
+      <Route path="/homepage" element={<Homepage />} />
       <Route path="/category" element={<Category />} />
       <Route path="/community" element={<Community />} />
       <Route path="/doctor-login" element={<DoctorLogin />} />
@@ -58,8 +59,9 @@ function App() {
       <Route path="/chatbot" element={<Chatbot  />} />  
       <Route path="/student-account" element={<StudentAccount  />} />  
       <Route path="/arpage" element={<AR  />} />  
-      <Route path="/beforelogin" element={<BeforeLogin  />} />  
+      <Route path="/start" element={<BeforeLogin  />} />  
       <Route path="/session" element={<Session  />} />  
+
     </Routes>
   );
 }

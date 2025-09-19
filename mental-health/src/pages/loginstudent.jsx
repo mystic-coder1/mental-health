@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -17,6 +18,8 @@ export default function LoginPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Login attempt:', formData);
+    // Navigate to homepage after login
+    navigate('/homepage');
   };
 
   const handleContinueWithoutLogin = () => {
