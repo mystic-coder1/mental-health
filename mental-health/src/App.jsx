@@ -44,6 +44,7 @@ import StudentAccount from './pages/studentaccount';
 import AR from './pages/ARpage';
 import BeforeLogin from './pages/beforelogin';
 import Session from './pages/sessionwithstudent';
+import StudentDoc from './pages/student-doctor';
 
 
 
@@ -61,6 +62,7 @@ function App() {
       <Route path="/arpage" element={<AR  />} />  
       <Route path="/" element={<BeforeLogin  />} />  
       <Route path="/session" element={<Session  />} />  
+      <Route path="/student-doc" element={<StudentDoc  />} />  
 
     </Routes>
   );
